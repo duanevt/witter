@@ -18,7 +18,7 @@ const io = require('socket.io')(http);
 
 const sessionStore = new MongoStore({ url: config.database, autoReconnect: true })
 
-mongoose.connect(config.database, function(err) {
+mongoose.connect(config.database, { useMongoClient: true }, function(err) {
   if (err) console.log(err);
   console.log("connected to the database");
 });
@@ -47,7 +47,7 @@ io.use(passportSocketIo.authorize({
   cookieParser: cookieParser,
   key: 'connect.sid',
   secret: config.secret,
-  store: sessionStore, 
+  store: sessionStore,
   success: onAuthorizeSuccess,
   fail: onAuthorizeFail
 }));
