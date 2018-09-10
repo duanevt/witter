@@ -70,8 +70,10 @@ const userRoutes = require('./routes/user');
 app.use(mainRoutes);
 app.use(userRoutes);
 
+const port = process.env.PORT || 3030;
 
-http.listen(3030, (err) => {
+
+http.listen(port, (err) => {
   if (err) console.log(err);
-  console.log(`Running on port ${3030}`);
+  console.log(`Running on port ${port}`);
 });
